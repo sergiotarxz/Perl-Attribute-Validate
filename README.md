@@ -82,11 +82,3 @@ None known.
 # AUTHOR
 
 Sergio Iglesias
-
-# POD ERRORS
-
-Hey! **The above document had some coding errors, which are explained below:**
-
-- Around line 102:
-
-    &#x3d;back without =over

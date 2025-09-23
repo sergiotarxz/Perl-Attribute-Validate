@@ -99,8 +99,6 @@ Receives a list of L<Type::Tiny> types and enforces those types into the argumen
 spec of L<Type::Params> to change the behavior of this module, for example {strictness => 0} as the first argument will allow the user
 to have more arguments than the ones declared.
 
-=back
-
 =head1 DEPENDENCIES
 
 The module will pull all the dependencies it needs on install, the minimum supported Perl is v5.16.3, although latest versions are mostly tested for 5.38.2

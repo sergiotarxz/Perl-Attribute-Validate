@@ -6,15 +6,10 @@ error() {
 
 echo 'Installing deps current perl';
 perl Build.PL || error
-./Build installdeps || error
-echo 'Installing deps minimum perl';
-perlbrew exec --with perl-5.16.3 perl Build.PL || error
 echo ./Build installdeps || error
-perlbrew exec --with perl-5.16.3 ./Build installdeps || error
+./Build installdeps || error
 echo "Testing current perl";
 prove || error
-echo "Testing 5.16.3";
-perlbrew exec --with perl-5.16.3 prove || error
 perl -e '
     use v5.38.2;
     use Path::Tiny;

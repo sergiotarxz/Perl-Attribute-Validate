@@ -51,7 +51,7 @@ If your OS Perl is too old perlbrew can be used instead.
 
 # BUGS AND LIMITATIONS
 
-Enchanting subroutines with attributes won't allow them to be used by this module because of limitations of the language.
+Enchanting anonymous subroutines with attributes won't allow them to be used by this module because of limitations of the language.
 
 # LICENSE AND COPYRIGHT
 

@@ -16,21 +16,21 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build" : "0"
+            "Module::Build" : 0
          }
       },
       "runtime" : {
          "requires" : {
-            "Attribute::Handlers" : "0",
-            "Carp" : "0",
-            "Carp::Always" : "0",
-            "Type::Params" : "0"
+            "Attribute::Handlers" : 0,
+            "Carp" : 0,
+            "Carp::Always" : 0,
+            "Type::Params" : "2.008003"
          }
       },
       "test" : {
          "requires" : {
-            "Test::Exception" : "0",
-            "Types::Standard" : "0"
+            "Test::Exception" : 0,
+            "Types::Standard" : 0
          }
       }
    },

@@ -1,2 +1,5 @@
 0.0.1 Tue 23 Sep 22:43:48 CEST 2025
     - Initial version
+0.0.2 Mon Sep 29 18:12:28 2025 +0200
+    - Setting minimum Type::Params version
+    - Fixing typo not mentioning you cannot use anonymous subs.

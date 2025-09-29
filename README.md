@@ -41,6 +41,18 @@ Receives a list of [Type::Tiny](https://metacpan.org/pod/Type%3A%3ATiny) types a
 spec of [Type::Params](https://metacpan.org/pod/Type%3A%3AParams) to change the behavior of this module, for example {strictness => 0} as the first argument will allow the user
 to have more arguments than the ones declared.
 
+## anon\_requires
+
+    my $say_thing = anon_requires(sub($thing) {
+        say $thing;
+    ), Str);
+
+    my $say_thing = anon_requires(sub($thing) {
+        say $thing;
+    }, \%spec, Str);
+
+Enforces types into anonymous subroutines since those cannot be enchanted using attributes.
+
 # DEPENDENCIES
 
 The module will pull all the dependencies it needs on install, the minimum supported Perl is v5.16.3, although latest versions are mostly tested for 5.38.2

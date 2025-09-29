@@ -10,7 +10,7 @@ use Type::Params qw/signature/;
 use Carp::Always;
 use Carp qw/confess/;
 
-our $VERSION = "0.0.1";
+our $VERSION = "0.0.2";
 
 {
     my %compilations_of_types;
@@ -109,7 +109,7 @@ If your OS Perl is too old perlbrew can be used instead.
 
 =head1 BUGS AND LIMITATIONS
 
-Enchanting subroutines with attributes won't allow them to be used by this module because of limitations of the language.
+Enchanting anonymous subroutines with attributes won't allow them to be used by this module because of limitations of the language.
 
 =head1 LICENSE AND COPYRIGHT
 

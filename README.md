@@ -41,6 +41,24 @@ Receives a list of [Type::Tiny](https://metacpan.org/pod/Type%3A%3ATiny) types a
 spec of [Type::Params](https://metacpan.org/pod/Type%3A%3AParams) to change the behavior of this module, for example {strictness => 0} as the first argument will allow the user
 to have more arguments than the ones declared.
 
+## VoidContext
+
+    sub doesnt_return: VoidContext {
+    }
+    my $lawless = doesnt_return(); # Dies
+    doesnt_return(); # Works
+
+Enforces the caller to use this sub in Void Context and do nothing with the return to avoid programmer errors and incorrect assumptions.
+
+## NoVoidContext
+
+    sub returns: NoVoidContext {
+    }
+    my $lawful = returns(); # Works
+    returns(); # Dies
+
+Enforces the caller to do something with the return of a sub to avoid programmer errors and assumptions.
+
 # EXPORTABLE SUBROUTINES
 
 ## anon\_requires

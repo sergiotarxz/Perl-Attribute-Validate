@@ -12,3 +12,7 @@
 0.0.4 Tue Sep 30 19:12:27 2025 +0200
     - Improving Kwalitee score
     - Separating Subs from Attributes in POD
+
+0.0.5 Tue Sep 30 21:24:59 2025 +0200
+    - Adding VoidContext validation to enforce how a sub must be used.
+    - Adding NoVoidContext validation to enforce how a sub must be used.

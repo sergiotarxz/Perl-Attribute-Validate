@@ -41,6 +41,8 @@ Receives a list of [Type::Tiny](https://metacpan.org/pod/Type%3A%3ATiny) types a
 spec of [Type::Params](https://metacpan.org/pod/Type%3A%3AParams) to change the behavior of this module, for example {strictness => 0} as the first argument will allow the user
 to have more arguments than the ones declared.
 
+# EXPORTABLE SUBROUTINES
+
 ## anon\_requires
 
     my $say_thing = anon_requires(sub($thing) {
@@ -67,13 +69,11 @@ Enchanting anonymous subroutines with attributes won't allow them to be used by 
 
 # LICENSE AND COPYRIGHT
 
-Copyright (c) 2025 Sergio Iglesias
+This software is Copyright (c) 2025 by Sergio Iglesias.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the " Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+This is free software, licensed under:
 
-The above copyright notice and this permission notice (including the next paragraph) shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    The MIT (X11) License
 
 # CREDITS
 

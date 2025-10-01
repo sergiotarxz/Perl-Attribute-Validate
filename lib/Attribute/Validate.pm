@@ -13,7 +13,7 @@ use Carp qw/confess/;
 use parent 'Exporter';    # inherit all of Exporter's methods
 our @EXPORT_OK = qw(anon_requires);
 
-our $VERSION = "0.0.5";
+our $VERSION = "0.0.6";
 
 {
     my %compilations_of_types;
@@ -39,6 +39,48 @@ our $VERSION = "0.0.5";
     }
 }
 
+sub UNIVERSAL::ListContext : ATTR(CODE) {
+    no warnings 'redefine';
+    no strict 'refs';
+    my (
+        $package, $symbol, $referent, $attr,
+        $data,    $phase,  $filename, $linenum
+    ) = @_;
+    if ( $symbol eq 'ANON' ) {
+        local $Carp::Internal{'Attribute::Validate'} = 1;
+        confess "Unable to add validation to anon subroutine";
+    }
+    my $orig_sub = *{$symbol}{CODE};
+    *{$symbol} = sub {
+        local $Carp::Internal{'Attribute::Validate'} = 1;
+        if ( !wantarray ) {
+            confess 'The return of this sub must be used in list context';
+        }
+        goto &$orig_sub;
+    }
+}
+
+sub UNIVERSAL::NoListContext : ATTR(CODE) {
+    no warnings 'redefine';
+    no strict 'refs';
+    my (
+        $package, $symbol, $referent, $attr,
+        $data,    $phase,  $filename, $linenum
+    ) = @_;
+    if ( $symbol eq 'ANON' ) {
+        local $Carp::Internal{'Attribute::Validate'} = 1;
+        confess "Unable to add validation to anon subroutine";
+    }
+    my $orig_sub = *{$symbol}{CODE};
+    *{$symbol} = sub {
+        local $Carp::Internal{'Attribute::Validate'} = 1;
+        if ( wantarray ) {
+            confess 'The return of this sub must never be used in list context';
+        }
+        goto &$orig_sub;
+    }
+}
+
 sub UNIVERSAL::NoVoidContext : ATTR(CODE) {
     no warnings 'redefine';
     no strict 'refs';
@@ -48,7 +90,7 @@ sub UNIVERSAL::NoVoidContext : ATTR(CODE) {
     ) = @_;
     if ( $symbol eq 'ANON' ) {
         local $Carp::Internal{'Attribute::Validate'} = 1;
-        confess "Unable to add signature to anon subroutine";
+        confess "Unable to add validation to anon subroutine";
     }
     my $orig_sub = *{$symbol}{CODE};
     *{$symbol} = sub {
@@ -69,7 +111,7 @@ sub UNIVERSAL::VoidContext : ATTR(CODE) {
     ) = @_;
     if ( $symbol eq 'ANON' ) {
         local $Carp::Internal{'Attribute::Validate'} = 1;
-        confess "Unable to add signature to anon subroutine";
+        confess "Unable to add validation to anon subroutine";
     }
     my $orig_sub = *{$symbol}{CODE};
     *{$symbol} = sub {
@@ -184,6 +226,28 @@ Enforces the caller to use this sub in Void Context and do nothing with the retu
     returns(); # Dies
 
 Enforces the caller to do something with the return of a sub to avoid programmer errors and assumptions.
+
+=head2 ListContext
+
+    sub only_use_in_list_context: ListContext {
+        return (0..10);
+    }
+    my $list = only_use_in_list_context(); # Dies
+    only_use_in_list_context(); # Dies
+    my @list = only_use_in_list_context(); # Works
+
+Enforces the caller to use the function in List Context to prevent errors and misunderstandings.
+
+=head2 NoListContext
+
+    sub never_use_in_list_context: NoListContext {
+        return 'scalar_or_void';
+    }
+    my $list = never_use_in_list_context(); # Works
+    never_use_in_list_context(); # Works
+    my @list = never_use_in_list_context(); # Dies
+
+Enforces the caller to never use the function in List Context to prevent errors and misunderstandings.
 
 =head1 EXPORTABLE SUBROUTINES
 

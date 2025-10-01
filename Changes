@@ -16,3 +16,8 @@
 0.0.5 Tue Sep 30 21:24:59 2025 +0200
     - Adding VoidContext validation to enforce how a sub must be used.
     - Adding NoVoidContext validation to enforce how a sub must be used.
+
+0.0.6 Wed Oct 1 19:19:22 2025 +0200
+    - Adding ListContext validation
+    - Adding NoListContext validation
+    - Improving error messages for context errors in anon subs.

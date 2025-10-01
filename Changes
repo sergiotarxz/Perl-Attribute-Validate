@@ -21,3 +21,9 @@
     - Adding ListContext validation
     - Adding NoListContext validation
     - Improving error messages for context errors in anon subs.
+
+0.0.7 Wed Oct 1 19:41:48 2025 +0200
+    - Adding ScalarContext validation
+    - Adding NoScalarContext validation
+    - Fixing references to "function" in the documentation while in Perl they are called subroutines.
+

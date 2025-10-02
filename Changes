@@ -27,3 +27,6 @@
     - Adding NoScalarContext validation
     - Fixing references to "function" in the documentation while in Perl they are called subroutines.
 
+0.0.8 Thu Oct 2 23:12:03 2025 +0200
+    - Missing test in the final dist.
+

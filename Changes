@@ -30,3 +30,5 @@
 0.0.8 Thu Oct 2 23:12:03 2025 +0200
     - Missing test in the final dist.
 
+0.0.9 Sat Oct 4 13:47:05 2025 +0200
+    - Avoiding $compiled confusing lines.

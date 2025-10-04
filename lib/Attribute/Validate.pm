@@ -13,7 +13,7 @@ use Carp qw/confess/;
 use parent 'Exporter';    # inherit all of Exporter's methods
 our @EXPORT_OK = qw(anon_requires);
 
-our $VERSION = "0.0.8";
+our $VERSION = "0.0.9";
 
 sub UNIVERSAL::Requires : ATTR(CODE) {
     no warnings 'redefine';

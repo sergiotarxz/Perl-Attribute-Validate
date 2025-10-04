@@ -15,28 +15,20 @@ our @EXPORT_OK = qw(anon_requires);
 
 our $VERSION = "0.0.8";
 
-{
-    my %compilations_of_types;
-
-    sub UNIVERSAL::Requires : ATTR(CODE) {
-        no warnings 'redefine';
-        no strict 'refs';
-        my (
-            $package, $symbol, $referent, $attr,
-            $data,    $phase,  $filename, $linenum
-        ) = @_;
-        if ( $symbol eq 'ANON' ) {
-            local $Carp::Internal{'Attribute::Validate'} = 1;
-            confess "Unable to add signature to anon subroutine";
-        }
-        my $orig_sub = *{$symbol}{CODE};
-        my $compiled = $compilations_of_types{$referent};
-        if ( !defined $compiled ) {
-            $compilations_of_types{$referent} = _requires_compile_types(@$data);
-        }
-        *{$symbol} =
-          _requires_new_sub( $compilations_of_types{$referent}, $orig_sub );
+sub UNIVERSAL::Requires : ATTR(CODE) {
+    no warnings 'redefine';
+    no strict 'refs';
+    my (
+        $package, $symbol, $referent, $attr,
+        $data,    $phase,  $filename, $linenum
+    ) = @_;
+    if ( $symbol eq 'ANON' ) {
+        local $Carp::Internal{'Attribute::Validate'} = 1;
+        confess "Unable to add signature to anon subroutine";
     }
+    my $orig_sub = *{$symbol}{CODE};
+    my $compiled = _requires_compile_types(@$data);
+    *{$symbol} = _requires_new_sub( $compiled, $orig_sub );
 }
 
 sub UNIVERSAL::ScalarContext : ATTR(CODE) {
@@ -53,7 +45,7 @@ sub UNIVERSAL::ScalarContext : ATTR(CODE) {
     my $orig_sub = *{$symbol}{CODE};
     *{$symbol} = sub {
         local $Carp::Internal{'Attribute::Validate'} = 1;
-        if ( !defined wantarray  ) {
+        if ( !defined wantarray ) {
             confess 'The return of this sub must be used in scalar context';
         }
         if (wantarray) {
@@ -77,7 +69,7 @@ sub UNIVERSAL::NoScalarContext : ATTR(CODE) {
     my $orig_sub = *{$symbol}{CODE};
     *{$symbol} = sub {
         local $Carp::Internal{'Attribute::Validate'} = 1;
-        if ( !defined wantarray  ) {
+        if ( !defined wantarray ) {
             goto &$orig_sub;
         }
         if (wantarray) {
@@ -122,7 +114,7 @@ sub UNIVERSAL::NoListContext : ATTR(CODE) {
     my $orig_sub = *{$symbol}{CODE};
     *{$symbol} = sub {
         local $Carp::Internal{'Attribute::Validate'} = 1;
-        if ( wantarray ) {
+        if (wantarray) {
             confess 'The return of this sub must never be used in list context';
         }
         goto &$orig_sub;
